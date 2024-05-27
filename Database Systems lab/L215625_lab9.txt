@@ -1,0 +1,55 @@
+Assumptions:
+
+Each policy holder has one and only one nominee.
+Each policy is registered by one policy holder.
+Each policy holder belongs to one and only one zone.
+Each zone has one and only one manager.
+Each agent is assigned to one and only one zone.
+Each agent procures policies for many policy holders.
+Each policy holder pays one and only one premium annually.
+Each policy has one and only one term.
+
+Entities:
+
+Policy Holder
+Key attribute: Social Security Number
+
+
+Policy
+Key attribute: Policy ID
+
+
+Nominee
+Key attribute: Nominee ID
+
+
+Zone
+Key attribute: Zone Number
+
+
+Manager
+Key attribute: Manager ID
+
+Agent
+Key attribute: Agent ID
+
+
+Relationships:
+
+Policy Holder registers for Policy: One-to-Many
+Policy Holder entity is on the one side, and Policy entity is on the many side.
+
+Policy has Nominee: One-to-One
+Policy entity is on the one side, and Nominee entity is on the one side.
+
+Policy Holder belongs to Zone: Many-to-One
+Zone entity is on the one side, and Policy Holder entity is on the many side.
+
+Zone has Manager: One-to-One
+Zone entity is on the one side, and Manager entity is on the one side.
+
+Agent is assigned to Zone: Many-to-One
+Zone entity is on the one side, and Agent entity is on the many side.
+
+Agent procures Policy for Policy Holder: Many-to-Many
+Agent entity is on one side, and Policy entity is on the other side. 

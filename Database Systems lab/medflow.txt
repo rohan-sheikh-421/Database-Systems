@@ -1,0 +1,70 @@
+-- Create the Patient table
+CREATE TABLE Patient (
+  patient_id INT PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  date_of_birth DATE,
+  gender VARCHAR(10),
+  address VARCHAR(100),
+  phone_number VARCHAR(20),
+  email VARCHAR(100),
+  blood_type VARCHAR(10),
+  medical_history VARCHAR(500)
+);
+
+-- Create the Doctor table
+CREATE TABLE Doctor (
+  doctor_id INT PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  specialization VARCHAR(100),
+  phone_number VARCHAR(20),
+  email VARCHAR(100),
+  address VARCHAR(100)
+);
+
+-- Create the Pharmacy table
+CREATE TABLE Pharmacy (
+  pharmacy_id INT PRIMARY KEY,
+  name VARCHAR(100),
+  address VARCHAR(100),
+  phone_number VARCHAR(20),
+  email VARCHAR(100)
+);
+
+-- Create the Blood Bank table
+CREATE TABLE BloodBank (
+  blood_bank_id INT PRIMARY KEY,
+  name VARCHAR(100),
+  address VARCHAR(100),
+  phone_number VARCHAR(20),
+  email VARCHAR(100)
+);
+
+-- Create the Appointment table
+CREATE TABLE Appointment (
+  appointment_id INT PRIMARY KEY,
+  patient_id INT,
+  doctor_id INT,
+  appointment_date DATETIME,
+  status VARCHAR(20),
+  FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+  FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id)
+);
+
+-- Create the Billing table
+CREATE TABLE Billing (
+  billing_id INT PRIMARY KEY,
+  appointment_id INT,
+  patient_id INT,
+  doctor_id INT,
+  pharmacy_id INT,
+  blood_bank_id INT,
+  amount DECIMAL(10,2),
+  payment_date DATE,
+  FOREIGN KEY (appointment_id) REFERENCES Appointment(appointment_id),
+  FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+  FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id),
+  FOREIGN KEY (pharmacy_id) REFERENCES Pharmacy(pharmacy_id),
+  FOREIGN KEY (blood_bank_id) REFERENCES BloodBank(blood_bank_id)
+);

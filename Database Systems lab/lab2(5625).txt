@@ -1,0 +1,106 @@
+Create database Students
+use Students
+create table Student(
+ RollNum varchar(225),
+ Name varchar(225),
+ Gender varchar(225),
+ Phone int
+);
+
+create table Attendance(
+ RollNum varchar(225),
+ Date date,
+ Status varchar(225),
+ ClassVenue int
+ );
+
+ create table ClassVenue(
+ ID int,
+ Building varchar(225),
+ RoomNum int,
+ Teacher varchar(225)
+ );
+
+ create table Teacher(
+  Name varchar(225),
+  Designation varchar(225),
+  Department varchar(225)
+  );
+
+  insert into Student(RollNum,Name,Gender,Phone)
+  values('21l-5625','rohan','male',0333-32323232);
+ 
+ insert into  Student
+  values('21l-5423','junaid','male',0343-5353535);
+  
+insert into Student
+ values('21l-5323','jamila','female',0343-5353765);
+
+ select * from Student
+
+ insert into Attendance(RollNum,Date,Status,ClassVenue)
+ values('21l5625','2-13-22','P',3);
+
+ insert into Attendance
+ values('21l5645','2-13-22','P',2);
+
+ insert into Attendance
+ values('21l6645','2-13-22','A',1);
+
+ select * from Attendance
+
+ insert into ClassVenue(ID,Building,RoomNum,Teacher)
+ values(1,'CS',3,'habibi');
+
+ insert into ClassVenue
+ values(2,'Civil',2,'shazia');
+
+ select * from ClassVenue
+
+ insert into Teacher(Name,Designation,Department)
+ values('habibi','professor','CS');
+ 
+ insert into Teacher
+  values('shazia','professor','Civil');
+
+   insert into Teacher
+  values('kashif','lecturer','CS');
+
+  select * from Teacher
+
+alter table Teacher
+alter column Name varchar(255) not null
+
+alter table ClassVenue
+alter column ID int not null
+Alter Table Student add Primary Key(RollNum)
+Alter Table Attendance add Foreign Key(RollNum) references Student(RollNum)
+Alter Table ClassVenue add Primary Key(ID)
+Alter Table Teacher add Primary Key(Name)
+Alter Table ClassVenue add Foreign Key(Teacher) references Teacher(Name)
+Alter Table Student add WarningCount int
+Alter Table Student drop Column Phone
+
+alter table ClassVenue 
+alter column Teacher varchar(255) not null
+
+Alter table Teacher add unique(Name);
+
+/* updation*/
+
+Update Teacher set Name = 'Dr. Kashif Zafar' where Name = 'kashif';
+
+/* deletion */
+
+Delete from Student where RollNum = '21l-5323'; /*No Student with this ID*/
+
+Delete from Student where RollNum = '21l-5625'; /*Conflicted With FK in Attendance*/
+
+Delete from Attendance where RollNum = '21l6645' and  Status = 'A' /* Executed*/
+
+/* check */
+
+Alter table Student add check (Gender in ('Female' ,'Male'));/*Executed*/
+Alter table Attendance add check (Status in ('P' ,'A'));/*Executed*/
+select * from Attendance
+Update Attendance set Status='L' where Status='P';
